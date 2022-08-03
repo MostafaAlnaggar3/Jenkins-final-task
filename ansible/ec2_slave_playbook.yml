@@ -1,38 +1,43 @@
-# in this playbook we will install jdk and docker to make ec2 as a jenkins salve
+# in this playbook we will install jdk, docker, create jenkins_home dir, and copy jar file to make ec2 as a jenkins salve
 
 - name: jenkins_slave
   hosts: all
   user: ubuntu
   become: yes
   tasks:
-    # to update system
-    - name: apt update
+    - name: update system
       apt: 
         update_cache: yes
     
-    # to install jdk
     - name: install jdk
       apt:
         name: openjdk-8-jdk
 
-    # to install docker
-    - name: ensure repository key is installed
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: ensure docker registry is available
-      apt_repository: 
-        repo: 'deb https://download.docker.com/linux/ubuntu bionic stable' 
-        state: present
-
-    - name: ensure docker and dependencies are installed
+    - name: update system
       apt: 
-        name: docker-ce 
         update_cache: yes
+
+    - name: install docker
+      apt: 
+        name: docker.io
         
     - name: create jenkins dir
       file: 
         path: /home/ubuntu/jenkins_home
         state: directory
         mode: '0777'
+
+    - name: create bin dir
+      file: 
+        path: ~/bin
+        state: directory
+        mode: '0777'
+
+    - name: copy jar file
+      copy:
+        src: /home/mostafa-alnaggar/Documents/agent.jar
+        dest: ~/bin/
+
+
+# ansible command : ansible-playbook -i invetory --private-key terraform_key_pair.pem  slave_playbook.yml
+        
