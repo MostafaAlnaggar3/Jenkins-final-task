@@ -7,7 +7,7 @@ pipeline {
         stage('get code') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/mahmoud254/jenkins_nodejs_example.git'
+                git 'https://github.com/MostafaAlnaggar3/jenkins-task.git'
             }
         }
         
@@ -18,9 +18,9 @@ pipeline {
                 // to build docker image from node app and push it to my docker hub
                 sh '''
 
-                    docker build . -f dockerfile -t mnaggar3396/jenkins-node-app
+                    docker build ./app -f ./app/dockerfile -t mnaggar3396/jenkins-node-app:2
                     docker login -u ${USERNAME} -p ${PASSWORD}
-                    docker push mnaggar3396/jenkins-node-app
+                    docker push mnaggar3396/jenkins-node-app:2
                 
                 '''
                 }
