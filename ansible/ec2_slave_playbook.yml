@@ -34,14 +34,14 @@
 
     - name: create bin dir
       file: 
-        path: ~/bin
+        path: /home/ubuntu/bin
         state: directory
         mode: '0777'
 
     - name: copy jar file
       copy:
         src: /home/mostafa-alnaggar/Documents/agent.jar
-        dest: ~/bin/
+        dest: /home/ubuntu/bin/
 
 
 # ansible command : ansible-playbook -i ./Inventory --private-key /home/mostafa-alnaggar/Documents/terraform_key_pair.pem  ec2_slave_playbook.yml

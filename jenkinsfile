@@ -7,7 +7,7 @@ pipeline {
         stage('get code') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/MostafaAlnaggar3/jenkins-task.git'
+                git 'https://github.com/mahmoud254/jenkins_nodejs_example.git'
             }
         }
         
@@ -18,7 +18,9 @@ pipeline {
                 // to build docker image from node app and push it to my docker hub
                 sh '''
 
-                    docker build ./app -f ./app/dockerfile -t mnaggar3396/jenkins-node-app
+                    docker build . -f dockerfile -t mnaggar3396/jenkins-node-app
+                    docker login -u ${USERNAME} -p ${PASSWORD}
+                    docker push mnaggar3396/jenkins-node-app
                 
                 '''
                 }
@@ -28,7 +30,10 @@ pipeline {
         stage('CD'){
             steps{
                 // to run a container from nodeapp image
-                sh ' docker run -d -p 3000:3000 mnaggar3396/jenkins-node-app '
+                sh 'docker run -d -p 3000:3000 \ 
+                    -e REDIS_HOSTNAME=terraform-cluster-example.grlyle.0001.use2.cache.amazonaws.com:6379 \
+                    -e RDS_HOSTNAME=mysqldb.cicabkr8cllj.us-east-2.rds.amazonaws.com -e RDS_USERNAME=admin -e RDS_PASSWORD=12345678 -e RDS_PORT=3306 \
+                    mnaggar3396/jenkins-node-app '
             }
         }
     }
