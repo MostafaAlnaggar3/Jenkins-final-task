@@ -20,6 +20,11 @@
     - name: install docker
       apt: 
         name: docker.io
+    
+    - name: change docker sock permissions
+      file:
+        path: /var/run/docker.sock
+        mode: '0666'
         
     - name: create jenkins dir
       file: 
@@ -39,5 +44,5 @@
         dest: ~/bin/
 
 
-# ansible command : ansible-playbook -i invetory --private-key terraform_key_pair.pem  slave_playbook.yml
+# ansible command : ansible-playbook -i ./Inventory --private-key /home/mostafa-alnaggar/Documents/terraform_key_pair.pem  ec2_slave_playbook.yml
         

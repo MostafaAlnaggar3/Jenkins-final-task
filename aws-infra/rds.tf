@@ -1,16 +1,15 @@
-# # This code will create rds instance in the default subent if you don`t have default vpc please create subnet group first
-# resource "aws_db_instance" "db_instance" {
-  
-#   identifier           = "mysqldb"
-#   allocated_storage    = 10
-#   engine               = "mysql"
-#   engine_version       = "5.7"
-#   instance_class       = "db.t3.micro"
-#   db_name              = "mydb"
-#   username             = "admin"
-#   password             = var.dbpassword
-#   parameter_group_name = "default.mysql5.7"
-#   skip_final_snapshot  = true
-#   availability_zone    = "${var.region}a"
-# }
+resource "aws_elasticache_subnet_group" "elasticache_subnet_group" {
+  name       = "terraform-elasticache-subnets"
+  subnet_ids = ["${module.Network.private_subnet_1_id}", "${module.Network.private_subnet_2_id}"]
+}
 
+resource "aws_elasticache_cluster" "terraform_elasticache_cluster" {
+  cluster_id           = "terraform-cluster-example"
+  engine               = "redis"
+  node_type            = "cache.t2.micro"
+  num_cache_nodes      = 1
+  parameter_group_name = "default.redis3.2"
+  engine_version       = "3.2.10"
+  port                 = 6379
+  subnet_group_name    = aws_elasticache_subnet_group.elasticache_subnet_group.name
+}
