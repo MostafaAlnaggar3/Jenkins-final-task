@@ -1,0 +1,11 @@
+[application]
+10.0.2.139
+
+[application:vars]
+ansible_user = ubuntu
+
+ansible_port = 22
+
+private_key_file = /home/mostafa-alnaggar/Documents/terraform_key_pair.pem
+
+ansible_ssh_common_args= '-o ProxyCommand="ssh -i /home/mostafa-alnaggar/Documents/terraform_key_pair.pem -W %h:%p -q ubuntu@44.200.151.237"'

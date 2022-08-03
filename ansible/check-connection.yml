@@ -1,0 +1,16 @@
+- name: jenkins_slave
+  hosts: application
+  user: ubuntu
+  become: yes
+  tasks:
+
+    - name: check connection
+      ping:
+
+    - name: Change file ownership, group and permissions
+      ansible.builtin.file:
+        path: /home/ubuntu/naggar
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+        state: touch

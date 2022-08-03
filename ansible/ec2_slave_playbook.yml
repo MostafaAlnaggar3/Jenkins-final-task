@@ -1,0 +1,38 @@
+# in this playbook we will install jdk and docker to make ec2 as a jenkins salve
+
+- name: jenkins_slave
+  hosts: all
+  user: ubuntu
+  become: yes
+  tasks:
+    # to update system
+    - name: apt update
+      apt: 
+        update_cache: yes
+    
+    # to install jdk
+    - name: install jdk
+      apt:
+        name: openjdk-8-jdk
+
+    # to install docker
+    - name: ensure repository key is installed
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: ensure docker registry is available
+      apt_repository: 
+        repo: 'deb https://download.docker.com/linux/ubuntu bionic stable' 
+        state: present
+
+    - name: ensure docker and dependencies are installed
+      apt: 
+        name: docker-ce 
+        update_cache: yes
+        
+    - name: create jenkins dir
+      file: 
+        path: /home/ubuntu/jenkins_home
+        state: directory
+        mode: '0777'

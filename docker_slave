@@ -1,0 +1,30 @@
+# in this image we will define docker container as a slave to run pipelines on it
+
+FROM ubuntu
+USER root
+
+# 1- install java
+RUN apt-get update
+RUN apt-get install -y openjdk-8-jdk
+
+# 2- install ssh server 
+RUN apt-get install -y openssh-server
+
+# 3- create jenkins user && create jenkins_home dir
+RUN useradd -ms /bin/bash jenkins
+RUN mkdir /home/jenkins/jenkins_home
+RUN chmod 777 /home/jenkins/jenkins_home
+
+# 4- install docker client
+RUN apt-get update -y && apt-get install -y apt-transport-https ca-certificates curl software-properties-common gnupg2
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+RUN apt-get update -y && apt-get install -y docker-ce
+
+# to add docker user to jenkins group
+RUN usermod -aG docker jenkins
+USER jenkins
+
+WORKDIR /home/jenkins/jenkins_home
+
+CMD ["tail","-f","/dev/null"]
