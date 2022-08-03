@@ -12,6 +12,7 @@ resource "aws_db_instance" "mysql-instance" {
   availability_zone           = "${var.region}a"
   allow_major_version_upgrade = true
   db_subnet_group_name        = aws_db_subnet_group.mysql-subnet-group.name
+  security_group_names        = [aws_security_group.sg-1.name]
 }
 
 resource "aws_db_subnet_group" "mysql-subnet-group" {

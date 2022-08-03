@@ -12,4 +12,5 @@ resource "aws_elasticache_cluster" "terraform_elasticache_cluster" {
   engine_version       = "3.2.10"
   port                 = 6379
   subnet_group_name    = aws_elasticache_subnet_group.elasticache_subnet_group.name
+  security_group_ids   = [aws_security_group.sg-1.id]
 }
