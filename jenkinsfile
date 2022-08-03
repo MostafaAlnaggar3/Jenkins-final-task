@@ -30,7 +30,7 @@ pipeline {
         stage('CD'){
             steps{
                 // to run a container from nodeapp image
-                sh 'docker run -d -p 3000:3000 -e REDIS_HOSTNAME=terraform-cluster-example.grlyle.0001.use2.cache.amazonaws.com:6379 -e RDS_HOSTNAME=mysqldb.cicabkr8cllj.us-east-2.rds.amazonaws.com -e RDS_USERNAME=admin -e RDS_PASSWORD=12345678 -e RDS_PORT=3306 mnaggar3396/jenkins-node-app '
+                sh 'docker run -d -p 3000:3000 -e REDIS_HOSTNAME=terraform-cluster-example.grlyle.0001.use2.cache.amazonaws.com -e REDIS_PORT=6379 -e RDS_HOSTNAME=mysqldb.cicabkr8cllj.us-east-2.rds.amazonaws.com -e RDS_USERNAME=admin -e RDS_PASSWORD=12345678 -e RDS_PORT=3306 mnaggar3396/jenkins-node-app '
             }
         }
     }
