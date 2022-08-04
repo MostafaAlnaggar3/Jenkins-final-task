@@ -4,7 +4,7 @@ Using Jenkins pipeline, building VPC with public and private subnets. The public
 
 ---
 
-# Repo components:
+# Repo components
 - ansible: this directory has ansible playbook configuration files
 - app: this directory has nodejs app files
 - aws-infra: this directory has terraform files to build AWS infrastructure
