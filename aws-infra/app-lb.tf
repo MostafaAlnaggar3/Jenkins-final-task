@@ -13,7 +13,6 @@ resource "aws_lb_target_group_attachment" "terraform-app-tg-attach" {
   port             = "3000"
 }
 
-
 # create an application load balancer
 resource "aws_lb" "terraform-app-lb" {
   name                       = "terraform-app-lb"
