@@ -1,3 +1,22 @@
+# Descreption
+
+Using Jenkins pipeline, building VPC with public and private subnets. The public subnet has a bastion host, using to be a proxy server. One of the private subnets has a private instance, configured with Ansible, to be a Jenkins Slave to run on it a Node.js app that connects to an RDS and an ElastiCache Redis instances in another private subnet and exposed to the internet by appliation loadbalancer.
+
+---
+# Tools
+
+<p align="center">
+<img src="https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg"/>
+<img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-ar21.svg"/>
+<img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg"/>
+<img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg"/>
+<img src="https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg"/>
+<img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-ar21.svg"/>
+<img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-ar21.svg"/>
+</p>
+
+---
+
 ## 1- Build your infrastructure on AWS by Terraform
 ```bash
 $ cd aws-infra
