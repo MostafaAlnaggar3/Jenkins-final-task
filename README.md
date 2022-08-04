@@ -3,6 +3,15 @@
 Using Jenkins pipeline, building VPC with public and private subnets. The public subnet has a bastion host, using to be a proxy server. One of the private subnets has a private instance, configured with Ansible, to be a Jenkins Slave to run on it a Node.js app that connects to an RDS and an ElastiCache Redis instances in another private subnet and exposed to the internet by appliation loadbalancer.
 
 ---
+
+# Repo components:
+- ansible: this directory has ansible playbook configuration files
+- app: this directory has nodejs app files
+- aws-infra: this directory has terraform files to build AWS infrastructure
+- dockerfile: to build a new image from jenkins with docker client
+- jenkinsfile: pipeline file
+---
+
 # Tools
 
 <p align="center">
