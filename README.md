@@ -18,7 +18,7 @@ $ docker run -d -p 8082:8080 -v /var/run/docker.sock:/var/run/docker.sock jenkin
 
 ---
 
-## 3- Make ssh on private instance from jenkins “jump host”
+## 3- Make ssh on private instance from jenkins container “jump host”
 
 create ~.ssh/config on Jenkins container
 
@@ -49,25 +49,23 @@ $ ssh app-instance
 
 ## 4- Make a private instance as a jenkins slave and run a pipeline on it
 
-1- Create a jump host first. <p>
-2- Download jar file.<p>
-3- Run ansible play book to prepare your instance to be a jenkins slave.
+1- Download jar file.<p>
+2- Run ansible play book to prepare your instance to be a jenkins slave.
 
 ```bash
 $ ansible-playbook -i Invetory --private-key terraform_key_pair.pem  ec2_slave_playbook.yml
 ```
 
-4- Create a new node
+3- Create a new node
 
-<img src="images/Untitled 6.png"/>
-<img src="images/Untitled 5.png"/>
-Save and lunch the agent and check your nodes:
+<p align="center"> <img src="images/Untitled 6.png"/>
+<img src="images/Untitled 5.png"/> </p>
+Save, lunch the agent and check your nodes:
 <img src="images/Untitled 7.png"/>
 
 Build your pipeline on the new node: 
 <img src="images/Untitled 10.png"/>
 
 Get load balancer URL and check your app:
-
-<img src="images/Untitled 8.png"/>
-<img src="images/Untitled 9.png"/>
+<p align="center"> <img src="images/Untitled 8.png"/>
+<img src="images/Untitled 9.png"/> </p>
